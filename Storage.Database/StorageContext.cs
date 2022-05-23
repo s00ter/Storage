@@ -7,7 +7,7 @@ namespace Storage.Database
     {
         public DbSet<Product> Products { get; set; }
 
-        public StorageContext(DbContextOptionsBuilder<StorageContext> contextOptionsBuilder)
+        public StorageContext(DbContextOptions<StorageContext> contextOptionsBuilder) : base(contextOptionsBuilder)
         {
 
         }

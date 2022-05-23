@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Storage.Database;
+using Storage.Database.Entities;
 
 namespace Storage
 {
@@ -27,22 +29,20 @@ namespace Storage
             _context = context;
             InitializeComponent();
 
-            /*
-            List<Product> products = db.Products.ToList();
 
-            string str = "";
-            foreach (Product product in products)
-                str += " Id: " + product.id + " Name: " + product.name + " Cost " + product.cost;
+            var products = _context.Products.ToList();
+
+            var str = products
+                .Aggregate("", (current, product) => current + (" Id: " + product.Id + " Name: " + product.Name + " Cost " + product.Cost));
 
             DBContext.Text = str;
-            */
         }
 
         private void ButtonFind_Click(object sender, RoutedEventArgs e)
         {
-            var content_find = TextFind.Text.Trim();
+            var contentFind = TextFind.Text.Trim();
 
-            MessageBox.Show(content_find.Length == 0 ? "Пустое поле ввода" : content_find);
+            MessageBox.Show(contentFind.Length == 0 ? "Пустое поле ввода" : contentFind);
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
