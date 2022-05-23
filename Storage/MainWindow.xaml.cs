@@ -20,11 +20,20 @@ namespace Storage
     /// </summary>
     public partial class MainWindow : Window
     {
+        //AppContext db;
         public MainWindow()
         {
             InitializeComponent();
-            
-            
+
+            /*
+            List<Product> products = db.Products.ToList();
+
+            string str = "";
+            foreach (Product product in products)
+                str += " Id: " + product.id + " Name: " + product.name + " Cost " + product.cost;
+
+            DBContext.Text = str;
+            */
         }
 
         private void ButtonFind_Click(object sender, RoutedEventArgs e)
