@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Storage.Database;
 
 namespace Storage
 {
@@ -20,26 +21,19 @@ namespace Storage
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly StorageContext _context;
+
+        public MainWindow(StorageContext context)
         {
+            _context = context;
             InitializeComponent();
-            
-            
         }
 
         private void ButtonFind_Click(object sender, RoutedEventArgs e)
         {
-            string content_find = TextFind.Text.Trim();
+            var content_find = TextFind.Text.Trim();
 
-            if (content_find.Length == 0)
-            {
-                MessageBox.Show("Пустое поле ввода");
-                
-            }
-            else
-            {
-                MessageBox.Show(content_find);
-            }
+            MessageBox.Show(content_find.Length == 0 ? "Пустое поле ввода" : content_find);
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)

@@ -13,9 +13,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ProductDB.db">
+    <ProjectReference Include="..\Storage.Database\Storage.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ProductDB.db" />
+    <Content Include="ProductDB.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
 
 </Project>
