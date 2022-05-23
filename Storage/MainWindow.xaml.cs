@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Storage.Database;
 
 namespace Storage
 {
@@ -27,6 +26,16 @@ namespace Storage
         {
             _context = context;
             InitializeComponent();
+
+            /*
+            List<Product> products = db.Products.ToList();
+
+            string str = "";
+            foreach (Product product in products)
+                str += " Id: " + product.id + " Name: " + product.name + " Cost " + product.cost;
+
+            DBContext.Text = str;
+            */
         }
 
         private void ButtonFind_Click(object sender, RoutedEventArgs e)
