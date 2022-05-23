@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 using Storage.Database;
 using Storage.Database.Entities;
+using Storage.ProductWindows;
 
 namespace Storage
 {
@@ -24,18 +28,24 @@ namespace Storage
     {
         private readonly StorageContext _context;
 
+        private readonly ObservableCollection<Product> _products;
+
         public MainWindow(StorageContext context)
         {
             _context = context;
             InitializeComponent();
 
+            _products = new ObservableCollection<Product>();
+            ProductDataGrid.ItemsSource = _products;
 
-            var products = _context.Products.ToList();
+            UpdateProductTable();
+        }
 
-            var str = products
-                .Aggregate("", (current, product) => current + (" Id: " + product.Id + " Name: " + product.Name + " Cost " + product.Cost));
+        private void UpdateProductTable()
+        {
+            _products.Clear();
 
-            DBContext.Text = str;
+            _context.Products.ToList().ForEach(product => _products.Add(product));
         }
 
         private void ButtonFind_Click(object sender, RoutedEventArgs e)
@@ -47,7 +57,15 @@ namespace Storage
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
+            var addWindow = new AddProductWindow();
+            if (addWindow.ShowDialog() != true)
+            {
+                return;
+            }
 
+            _context.Products.Add(addWindow.Result);
+            _context.SaveChanges();
+            UpdateProductTable();
         }
     }
 }
