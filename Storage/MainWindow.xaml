@@ -21,7 +21,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="130" />
                     <ColumnDefinition Width="130" />
-                    <ColumnDefinition Width="85" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" x:Name="AddProduct" Click="AddProduct_Click" Content="Добавить товар" HorizontalAlignment="Left" Margin="0,0,0,0" Cursor="Hand"/>
                 <Button Grid.Column="1" x:Name="DeleteRowButton" Click="DeleteRowButton_Click" Content="Удалить" HorizontalAlignment="Left"></Button>
@@ -31,7 +32,10 @@
                     <CheckBox x:Name="ProstoreSearchCheckBox" IsChecked="True">Простор</CheckBox>
                     <CheckBox x:Name="AlenSearchCheckBox" IsChecked="True">АленСтрой</CheckBox>
                 </StackPanel>
-                <TextBox Grid.Column='5' TextChanged="TextFind_TextChanged" x:Name="TextFind" materialDesign:HintAssist.Hint="Текст поиска" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Margin="0,0,0,0" Width="120" Cursor="Arrow"/>
+                <TextBox Grid.Column="5" TextChanged="TextFind_TextChanged" x:Name="TextFind" materialDesign:HintAssist.Hint="Текст поиска" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Margin="0,0,0,0" Width="120" Cursor="Arrow"/>
+                <Button Grid.Column="6" x:Name="SettingsButton" Click="SettingsButton_OnClick" Background="DimGray" Margin="15, 0" HorizontalAlignment="Center">
+                    ⚙
+                </Button>
             </Grid>
         </Border>
         <Border Grid.Row="1" Background="White" Padding="10" CornerRadius="10">

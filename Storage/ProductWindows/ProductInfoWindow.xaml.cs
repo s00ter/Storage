@@ -6,6 +6,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using Storage.Database.Entities.ProductInfos;
+using Storage.Database.Entities.Products;
 using Storage.Database.Enums;
 
 namespace Storage.ProductWindows

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using Newtonsoft.Json;
+using Storage.Database.Entities.Products;
 using Storage.Database.Enums;
 
 namespace Storage.ProductWindows

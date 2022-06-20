@@ -1,13 +1,10 @@
-﻿namespace Storage.Database.Entities
+﻿namespace Storage.Database.Entities.ProductInfos
 {
-    public class ProductInfo
+    public class BaseProductInfo
     {
         public int Id { get; set; }
-        public int ProductId { get; set; }
         public string Action { get; set; }
         public string Date { get; set; }
         public int Amount { get; set; }
-
-        public Product Product { get; set; }
     }
 }

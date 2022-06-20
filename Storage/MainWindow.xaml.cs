@@ -6,7 +6,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
+using Storage.Database.Entities.ProductInfos;
+using Storage.Database.Entities.Products;
 using Storage.Database.Enums;
+using Storage.SettingsWindows;
 
 namespace Storage
 {
@@ -41,6 +45,9 @@ namespace Storage
             UpdateProductTable();
 
             ProductDataGrid.MouseDoubleClick += ProductDataGrid_MouseDoubleClick;
+            AllDataGrid.MouseDoubleClick += AllDataGridOnMouseDoubleClick;
+            ResourceDataGrid.MouseDoubleClick += ResourceDataGridOnMouseDoubleClick;
+            MainDataGrid.MouseDoubleClick += MainDataGridOnMouseDoubleClick;
 
             AlenSearchCheckBox.Checked += (_, _) =>
             {
@@ -61,6 +68,36 @@ namespace Storage
             {
                 UpdateProductTable(_alls.Where(x => x.ProductOwner != ProductOwner.Простор).ToList());
             };
+        }
+
+        private void MainDataGridOnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (MainDataGrid.SelectedItem is Product product)
+            {
+                var infoWindow = new ProductInfoWindow(product, _context);
+                infoWindow.ShowDialog();
+                TextFind_TextChanged(default, default);
+            }
+        }
+
+        private void ResourceDataGridOnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (ResourceDataGrid.SelectedItem is Product product)
+            {
+                var infoWindow = new ProductInfoWindow(product, _context);
+                infoWindow.ShowDialog();
+                TextFind_TextChanged(default, default);
+            }
+        }
+
+        private void AllDataGridOnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (AllDataGrid.SelectedItem is Product product)
+            {
+                var infoWindow = new ProductInfoWindow(product, _context);
+                infoWindow.ShowDialog();
+                TextFind_TextChanged(default, default);
+            }
         }
 
         private void ProductDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -156,8 +193,52 @@ namespace Storage
                 {
                     return;
                 }
+
+                var productToDelete = _context.Products
+                    .AsNoTracking()
+                    .First(x => x.Id == product.Id);
+
+                var productInfoToDelete = _context.ProductInfo
+                    .AsNoTracking()
+                    .Where(x => x.ProductId == productToDelete.Id)
+                    .ToList();
+
+                var basketItem = new DeletedProduct
+                {
+                    Name = productToDelete.Name,
+                    Cost = productToDelete.Cost,
+                    Coming = productToDelete.Coming,
+                    Amount = productToDelete.Amount,
+                    DimensionType = productToDelete.DimensionType,
+                    VendorCode = productToDelete.VendorCode,
+                    Status = productToDelete.Status,
+                    Info = productToDelete.Info,
+                    Provider = productToDelete.Provider,
+                    ProductType = productToDelete.ProductType,
+                    ProductOwner = productToDelete.ProductOwner,
+                    DeletedProductInfos = productInfoToDelete
+                        .Select(x => new DeletedProductInfo
+                        {
+                            Date = x.Date,
+                            Amount = x.Amount,
+                            Action = x.Action
+                        })
+                        .ToList()
+                };
+
+                _context.ProductInfo.RemoveRange(productInfoToDelete);
+                _context.SaveChanges();
+
+                product.ProductInfos = null;
+
                 _context.Products.Remove(product);
                 _context.SaveChanges();
+
+                _context.ProductBasket.Add(basketItem);
+                _context.SaveChanges();
+
+                _context.Entry(basketItem).State = EntityState.Detached;
+
                 TextFind_TextChanged(default, default);
             }
         }
@@ -221,6 +302,14 @@ namespace Storage
             }
 
             UpdateProductTable(result);
+        }
+
+        private void SettingsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var window = new SettingsWindow(_context);
+            window.ShowDialog();
+
+            UpdateProductTable();
         }
     }
 }

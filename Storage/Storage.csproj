@@ -23,6 +23,11 @@
     <Content Include="ProductDB.db">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
+    <None Remove="appsettings.json" />
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Remove="Images\settings.png" />
   </ItemGroup>
 
 </Project>

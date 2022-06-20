@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Storage.Database.Enums;
+﻿using Storage.Database.Enums;
 
-namespace Storage.Database.Entities
+namespace Storage.Database.Entities.Products
 {
-    public class Product
+    public class BaseProduct
     {
         public int Id { get; set; }
 
@@ -20,8 +19,5 @@ namespace Storage.Database.Entities
         public ProductType ProductType { get; set; }
 
         public ProductOwner ProductOwner { get; set; }
-
-
-        public List<ProductInfo> ProductInfo { get; set; }
     }
 }
