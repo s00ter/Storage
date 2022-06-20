@@ -13,7 +13,7 @@ namespace Storage
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private readonly StorageContext _context;
         private readonly ObservableCollection<Product> _alls;
@@ -86,7 +86,6 @@ namespace Storage
 
             if (initValue.Count == 0)
             {
-                MessageBox.Show("Ничего не найдено");
                 return;
             }
 
@@ -141,18 +140,41 @@ namespace Storage
 
         private void DeleteRowButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ProductDataGrid.SelectedItem is Product product)
+            var selected = DataGridsTabControl.SelectedIndex switch
             {
+                0 => AllDataGrid,
+                1 => ProductDataGrid,
+                2 => MainDataGrid,
+                3 => ResourceDataGrid,
+                _ => null
+            };
+
+            if (selected?.SelectedItem is Product product)
+            {
+                if (MessageBox.Show("Вы действительно хотите удалить?", string.Empty, MessageBoxButton.YesNo) ==
+                    MessageBoxResult.No)
+                {
+                    return;
+                }
                 _context.Products.Remove(product);
                 _context.SaveChanges();
-                UpdateProductTable();
+                TextFind_TextChanged(default, default);
             }
         }
 
 
         private void ChangeData_Click(object sender, RoutedEventArgs e)
         {
-            if (ProductDataGrid.SelectedItem is Product product)
+            var selected = DataGridsTabControl.SelectedIndex switch
+            {
+                0 => AllDataGrid,
+                1 => ProductDataGrid,
+                2 => MainDataGrid,
+                3 => ResourceDataGrid,
+                _ => null
+            };
+
+            if (selected?.SelectedItem is Product product)
             {
                 var addWindow = new AddProductWindow(product);
                 if (addWindow.ShowDialog() != true)

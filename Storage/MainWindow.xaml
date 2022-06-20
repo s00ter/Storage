@@ -35,7 +35,7 @@
             </Grid>
         </Border>
         <Border Grid.Row="1" Background="White" Padding="10" CornerRadius="10">
-            <TabControl>
+            <TabControl x:Name="DataGridsTabControl">
                 <TabItem>
                     <TabItem.Header>
                         Все
@@ -53,6 +53,7 @@
                             <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding ProductOwner}" Width="*" Header="Владелец"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
@@ -73,6 +74,7 @@
                             <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding ProductOwner}" Width="*" Header="Владелец"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
@@ -93,6 +95,7 @@
                             <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding ProductOwner}" Width="*" Header="Владелец"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
@@ -113,6 +116,7 @@
                             <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding ProductOwner}" Width="*" Header="Владелец"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>

@@ -25,7 +25,6 @@
             <ComboBox x:Name="ProductTypeComboBox" Width="150" Cursor="Arrow" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
             </ComboBox>
             <ComboBox x:Name="ProductOwnerComboBox" Width="150" Cursor="Arrow" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <TextBlock>Основной</TextBlock>
             </ComboBox>
             <Button x:Name="AddButton" Click="AddButton_OnClick" Margin="50, 20" Cursor="Hand">Добавить</Button>
         </StackPanel>
