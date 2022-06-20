@@ -6,6 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using Storage.Database.Enums;
 
 namespace Storage.ProductWindows
 {
@@ -14,13 +15,13 @@ namespace Storage.ProductWindows
     /// </summary>
     public partial class ProductInfoWindow : Window
     {
-        private Product currentProduct;
+        private Product _currentProduct;
         private readonly StorageContext _context;
         private readonly ObservableCollection<ProductInfo> _productInfos;
 
         public ProductInfoWindow(Product product, StorageContext context)
         {
-            this.currentProduct = product;
+            _currentProduct = product;
             _context = context;
             _productInfos = new ObservableCollection<ProductInfo>();
 
@@ -38,7 +39,7 @@ namespace Storage.ProductWindows
 
             _context.ProductInfo
                 .AsNoTracking()
-                .Where(x => x.ProductId == currentProduct.Id)
+                .Where(x => x.ProductId == _currentProduct.Id)
                 .ToList()
                 .ForEach(x => _productInfos.Add(x));
         }
@@ -73,7 +74,7 @@ namespace Storage.ProductWindows
                 date = DateTime.Now;
             }
 
-            if (!type && currentProduct.Amount < ChangeValue)
+            if (!type && _currentProduct.Amount < ChangeValue)
             {
                 MessageBox.Show("Приход не может быть зафиксирован");
                 return;
@@ -85,7 +86,7 @@ namespace Storage.ProductWindows
                     ? "Приход"
                     : "Расход",
                 Amount = ChangeValue,
-                ProductId = currentProduct.Id,
+                ProductId = _currentProduct.Id,
                 Date = date == null
                     ? DateOfChangePicker.SelectedDate.Value.ToString("d")
                     : date.Value.ToString("d")
@@ -95,24 +96,19 @@ namespace Storage.ProductWindows
             _context.SaveChanges();
             _context.Entry(result).State = EntityState.Detached;
 
-            var productToUpdate = _context.Products.FirstOrDefault(x => x.Id == currentProduct.Id);
+            var productToUpdate = _context.Products.FirstOrDefault(x => x.Id == _currentProduct.Id);
 
-            productToUpdate.Amount += result.Amount * (type ? 1 : -1);
+            productToUpdate!.Amount += result.Amount * (type ? 1 : -1);
 
-            if (productToUpdate.Amount == 0)
-            {
-                productToUpdate.Status = ProductConstants.NotAvailableStatus;
-            }
-            else
-            {
-                productToUpdate.Status = ProductConstants.AvailableStatus;
-            }
+            productToUpdate.Status = productToUpdate.Amount == 0
+                ? ProductStatus.Закончилось
+                : ProductStatus.Наличие;
 
             _context.Update(productToUpdate);
             _context.SaveChanges();
             _context.Entry(productToUpdate).State = EntityState.Detached;
 
-            currentProduct = productToUpdate;
+            _currentProduct = productToUpdate;
 
             UpdateTable();
         }

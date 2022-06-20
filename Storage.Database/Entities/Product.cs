@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Storage.Database.Enums;
 
 namespace Storage.Database.Entities
 {
@@ -12,12 +13,13 @@ namespace Storage.Database.Entities
         public string Coming { get; set; }
         public int Amount { get; set; }
         public string VendorCode { get; set; }
-        public string Status { get; set; }
+        public ProductStatus Status { get; set; }
         public string Info { get; set; }
-        public string Client { get; set; }
         public string Provider { get; set; }
         public string DimensionType { get; set; }
-        public string ProductType { get; set; }
+        public ProductType ProductType { get; set; }
+
+        public ProductOwner ProductOwner { get; set; }
 
 
         public List<ProductInfo> ProductInfo { get; set; }

@@ -22,9 +22,9 @@
             <TextBox x:Name="InfoTextBox" materialDesign:HintAssist.Hint="Информация" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
             <TextBox x:Name="ProviderTextBox" materialDesign:HintAssist.Hint="Поставщик" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
             <TextBox x:Name="CostTextBox" materialDesign:HintAssist.Hint="Цена" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
-            <ComboBox x:Name="ProductTypeComboBox" Width="150" Cursor="Arrow" SelectedIndex="0" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <TextBlock>Продукт</TextBlock>
-                <TextBlock>Расходник</TextBlock>
+            <ComboBox x:Name="ProductTypeComboBox" Width="150" Cursor="Arrow" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            </ComboBox>
+            <ComboBox x:Name="ProductOwnerComboBox" Width="150" Cursor="Arrow" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                 <TextBlock>Основной</TextBlock>
             </ComboBox>
             <Button x:Name="AddButton" Click="AddButton_OnClick" Margin="50, 20" Cursor="Hand">Добавить</Button>

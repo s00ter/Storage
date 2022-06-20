@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Storage.Database;
-using Storage.Database.Constants;
 using Storage.Database.Entities;
 using Storage.ProductWindows;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using Storage.Database.Enums;
 
 namespace Storage
 {
@@ -16,19 +16,51 @@ namespace Storage
     public partial class MainWindow : Window
     {
         private readonly StorageContext _context;
+        private readonly ObservableCollection<Product> _alls;
         private readonly ObservableCollection<Product> _products;
+        private readonly ObservableCollection<Product> _mains;
+        private readonly ObservableCollection<Product> _recources;
 
         public MainWindow(StorageContext context)
         {
             _context = context;
             InitializeComponent();
 
+            _alls = new ObservableCollection<Product>();
+            AllDataGrid.ItemsSource = _alls;
+
             _products = new ObservableCollection<Product>();
             ProductDataGrid.ItemsSource = _products;
+
+            _mains = new ObservableCollection<Product>();
+            MainDataGrid.ItemsSource = _mains;
+
+            _recources = new ObservableCollection<Product>();
+            ResourceDataGrid.ItemsSource = _recources;
 
             UpdateProductTable();
 
             ProductDataGrid.MouseDoubleClick += ProductDataGrid_MouseDoubleClick;
+
+            AlenSearchCheckBox.Checked += (_, _) =>
+            {
+                UpdateProductTable(_alls.Where(x => x.ProductOwner == ProductOwner.АленСтрой).ToList());
+            };
+
+            AlenSearchCheckBox.Unchecked += (_, _) =>
+            {
+                UpdateProductTable(_alls.Where(x => x.ProductOwner != ProductOwner.АленСтрой).ToList());
+            };
+
+            ProstoreSearchCheckBox.Checked += (_, _) =>
+            {
+                UpdateProductTable(_alls.Where(x => x.ProductOwner == ProductOwner.Простор).ToList());
+            };
+
+            ProstoreSearchCheckBox.Unchecked += (_, _) =>
+            {
+                UpdateProductTable(_alls.Where(x => x.ProductOwner != ProductOwner.Простор).ToList());
+            };
         }
 
         private void ProductDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -41,22 +73,40 @@ namespace Storage
             }
         }
 
-        private void UpdateProductTable(IEnumerable<Product> initValue = null)
+        private void UpdateProductTable(List<Product> initValue = null)
         {
             _products.Clear();
+            _alls.Clear();
+            _mains.Clear();
+            _recources.Clear();
 
-            if (initValue != null)
+            initValue ??= _context.Products
+                .AsNoTracking()
+                .ToList();
+
+            if (initValue.Count == 0)
             {
-                initValue
-                    .ToList()
-                    .ForEach(product => _products.Add(product));
+                MessageBox.Show("Ничего не найдено");
                 return;
             }
 
-            _context.Products
-                .AsNoTracking()
+            initValue
+                .ForEach(product => _alls.Add(product));
+
+            initValue
+                .Where(product => product.ProductType == ProductType.Расходник)
+                .ToList()
+                .ForEach(product => _recources.Add(product));
+
+            initValue
+                .Where(product => product.ProductType == ProductType.Продукт)
                 .ToList()
                 .ForEach(product => _products.Add(product));
+
+            initValue
+                .Where(product => product.ProductType == ProductType.Основной)
+                .ToList()
+                .ForEach(product => _mains.Add(product));
         }
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
@@ -119,8 +169,10 @@ namespace Storage
 
         private bool CheckAvailable(Product product)
         {
+            var result = AlenSearchCheckBox.IsChecked == true && product.ProductOwner == ProductOwner.АленСтрой;
+            result = result || ProstoreSearchCheckBox.IsChecked == true && product.ProductOwner == ProductOwner.Простор;
 
-            return true;
+            return result;
         }
 
         private void ReportButton_Click(object sender, RoutedEventArgs e)
@@ -136,12 +188,14 @@ namespace Storage
             var result = _context.Products
                 .AsNoTracking()
                 .ToList()
-                .Where(x => CheckAvailable(x));
+                .Where(CheckAvailable)
+                .ToList();
 
             if (contentFind.Length is not 0)
             {
                 result = result
-                    .Where(x => x.Name.ToLower().Contains(contentFind));
+                    .Where(x => x.Name.ToLower().Contains(contentFind))
+                    .ToList();
             }
 
             UpdateProductTable(result);

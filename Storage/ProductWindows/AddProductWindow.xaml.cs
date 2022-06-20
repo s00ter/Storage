@@ -1,12 +1,14 @@
 ﻿using Storage.Database.Entities;
 using System;
+using System.Linq;
 using System.Windows;
+using Storage.Database.Enums;
 
 namespace Storage.ProductWindows
 {
-    public partial class AddProductWindow : Window
+    public partial class AddProductWindow
     {
-        private readonly int _currentId = 0;
+        private readonly int _currentId;
 
         public Product Result { get; set; }
 
@@ -14,6 +16,9 @@ namespace Storage.ProductWindows
         public AddProductWindow()
         {
             InitializeComponent();
+
+            InitializeProductOwner(ProductOwner.Простор);
+            InitializeProductType(ProductType.Расходник);
         }
 
         public AddProductWindow(Product product)
@@ -30,8 +35,26 @@ namespace Storage.ProductWindows
             VendorCodeTextBox.Text = product.VendorCode;
             InfoTextBox.Text = product.Info;
             ProviderTextBox.Text = product.Provider;
-            ProductTypeComboBox.Text = product.ProductType;
             _currentId = product.Id;
+
+            InitializeProductType(product.ProductType);
+            InitializeProductOwner(product.ProductOwner);
+        }
+
+        private void InitializeProductType(ProductType productType)
+        {
+            var items = Enum.GetValues<ProductType>();
+            ProductTypeComboBox.ItemsSource = items;
+
+            ProductTypeComboBox.SelectedItem = items.First(x => x == productType);
+        }
+
+        private void InitializeProductOwner(ProductOwner productOwner)
+        {
+            var items = Enum.GetValues<ProductOwner>();
+            ProductOwnerComboBox.ItemsSource = items;
+
+            ProductOwnerComboBox.SelectedItem = items.First(x => x == productOwner);
         }
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
@@ -71,12 +94,13 @@ namespace Storage.ProductWindows
                 Amount = amount,
                 DimensionType = DimensionTypeTextBox.Text,
                 VendorCode = VendorCodeTextBox.Text,
-                Status = "В наличии",
+                Status = amount == 0
+                    ? ProductStatus.Закончилось
+                    : ProductStatus.Наличие,
                 Info = InfoTextBox.Text,
                 Provider = ProviderTextBox.Text,
-                ProductType = ProductTypeComboBox.Text
-
-
+                ProductType = (ProductType)ProductTypeComboBox.SelectedItem,
+                ProductOwner = (ProductOwner)ProductOwnerComboBox.SelectedItem
             };
 
             DialogResult = true;
