@@ -1,7 +1,9 @@
 ﻿using Storage.Database.Entities;
 using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
+using Newtonsoft.Json;
 using Storage.Database.Enums;
 
 namespace Storage.ProductWindows
@@ -9,6 +11,7 @@ namespace Storage.ProductWindows
     public partial class AddProductWindow
     {
         private readonly int _currentId;
+        private const string TempAddPath = "tempAdd.Json";
 
         public Product Result { get; set; }
 
@@ -17,8 +20,71 @@ namespace Storage.ProductWindows
         {
             InitializeComponent();
 
-            InitializeProductOwner(ProductOwner.Простор);
-            InitializeProductType(ProductType.Расходник);
+            if (File.Exists(TempAddPath))
+            {
+                var product = JsonConvert.DeserializeObject<Product>(File.ReadAllText(TempAddPath));
+
+                if (product is not null)
+                {
+                    NameTextBox.Text = product.Name;
+                    CostTextBox.Text = product.Cost.ToString("f2");
+
+                    ComingPicker.SelectedDate = product.Coming == null
+                        ? null
+                        : DateTime.Parse(product.Coming);
+
+                    AmountTextBox.Text = product.Amount.ToString();
+                    DimensionTypeTextBox.Text = product.DimensionType;
+                    VendorCodeTextBox.Text = product.VendorCode;
+                    InfoTextBox.Text = product.Info;
+                    ProviderTextBox.Text = product.Provider;
+                    _currentId = product.Id;
+
+                    InitializeProductType(product.ProductType);
+                    InitializeProductOwner(product.ProductOwner);
+                }
+                else
+                {
+                    InitializeProductOwner(ProductOwner.Простор);
+                    InitializeProductType(ProductType.Расходник);
+                }
+            }
+            else
+            {
+                InitializeProductOwner(ProductOwner.Простор);
+                InitializeProductType(ProductType.Расходник);
+            }
+
+            Closing += (_, _) =>
+            {
+                if (!double.TryParse(CostTextBox.Text, out var cost))
+                {
+                    cost = 0;
+                }
+
+                if (!int.TryParse(AmountTextBox.Text, out var amount))
+                {
+                    amount = 0;
+                }
+
+                var tempObject = new Product
+                {
+                    Name = NameTextBox.Text,
+                    Cost = cost,
+                    Coming = ComingPicker.SelectedDate?.ToString("d"),
+                    Amount = amount,
+                    DimensionType = DimensionTypeTextBox.Text,
+                    VendorCode = VendorCodeTextBox.Text,
+                    Status =  ProductStatus.Наличие,
+                    Info = InfoTextBox.Text,
+                    Provider = ProviderTextBox.Text,
+                    ProductType = (ProductType)ProductTypeComboBox.SelectedItem,
+                    ProductOwner = (ProductOwner)ProductOwnerComboBox.SelectedItem
+                };
+
+                var serializedObject = JsonConvert.SerializeObject(tempObject);
+                File.WriteAllText(TempAddPath, serializedObject);
+            };
         }
 
         public AddProductWindow(Product product)
@@ -45,7 +111,6 @@ namespace Storage.ProductWindows
         {
             var items = Enum.GetValues<ProductType>();
             ProductTypeComboBox.ItemsSource = items;
-
             ProductTypeComboBox.SelectedItem = items.First(x => x == productType);
         }
 
@@ -53,7 +118,6 @@ namespace Storage.ProductWindows
         {
             var items = Enum.GetValues<ProductOwner>();
             ProductOwnerComboBox.ItemsSource = items;
-
             ProductOwnerComboBox.SelectedItem = items.First(x => x == productOwner);
         }
 
@@ -104,6 +168,11 @@ namespace Storage.ProductWindows
             };
 
             DialogResult = true;
+
+            if (_currentId == 0 && File.Exists(TempAddPath))
+            {
+                File.Delete(TempAddPath);
+            }
         }
     }
 }
