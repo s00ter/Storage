@@ -11,9 +11,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*" MaxHeight="70"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Background="White" Margin="10" CornerRadius="10" Padding="5">
-            <Grid>
+        <Border Background="White" x:Name="HeaderBorder" Margin="10" CornerRadius="10" Padding="5">
+            <Grid x:Name="HeaderGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="155" />
                     <ColumnDefinition Width="100" />
@@ -126,5 +127,8 @@
                 </TabItem>
             </TabControl>
         </Border>
+        <Grid Grid.Row="2">
+            <Label HorizontalAlignment="Right" x:Name="NotificationLabel" FontSize="20" Background="SpringGreen" MouseDoubleClick="Control_OnMouseDoubleClick">Не найдено заканчивающихся товаров</Label>
+        </Grid>
     </Grid>
 </Window>

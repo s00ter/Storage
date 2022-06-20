@@ -12,10 +12,7 @@
             <TextBox x:Name="NameTextBox" materialDesign:HintAssist.Hint="Наименование" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
             <TextBox x:Name="VendorCodeTextBox" materialDesign:HintAssist.Hint="Артикул" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
             <TextBox x:Name="AmountTextBox" materialDesign:HintAssist.Hint="Кол-во" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
-            <ComboBox x:Name="DimensionTypeTextBox" Width="150" Cursor="Arrow" SelectedIndex="0" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <TextBlock>Штуки</TextBlock>
-                <TextBlock>Литры</TextBlock>
-                <TextBlock>Метры</TextBlock>
+            <ComboBox x:Name="DimensionTypeTextBox" Width="150" Cursor="Arrow" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
             </ComboBox>
             <DatePicker x:Name="ComingPicker" materialDesign:HintAssist.Hint="Приход" Style="{StaticResource MaterialDesignDatePicker}" Width="150" Cursor="Arrow"/>
             

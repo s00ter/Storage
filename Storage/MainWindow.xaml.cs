@@ -7,9 +7,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using Storage.Database.Entities.ProductInfos;
 using Storage.Database.Entities.Products;
 using Storage.Database.Enums;
+using Storage.Helpers;
+using Storage.NotificationWindows;
 using Storage.SettingsWindows;
 
 namespace Storage
@@ -100,7 +103,7 @@ namespace Storage
             }
         }
 
-        private void ProductDataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ProductDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ProductDataGrid.SelectedItem is Product product)
             {
@@ -110,8 +113,30 @@ namespace Storage
             }
         }
 
+        private void SetNotification(IReadOnlyCollection<Product> products)
+        {
+            if (products.Any())
+            {
+                NotificationLabel.Content = $"Найдено {products.Count} заканчивающихся товаров";
+                NotificationLabel.Background = new SolidColorBrush { Color = Colors.Red };
+            }
+            else
+            {
+                NotificationLabel.Content = "Не найдено заканчивающихся товаров";
+                NotificationLabel.Background = new SolidColorBrush { Color = Colors.SpringGreen };
+            }
+        }
+
         private void UpdateProductTable(List<Product> initValue = null)
         {
+            var productToCheckNotification = _context.Products
+                .AsNoTracking()
+                .ToList()
+                .Where(x => x.CheckDanger())
+                .ToList();
+
+            SetNotification(productToCheckNotification);
+
             _products.Clear();
             _alls.Clear();
             _mains.Clear();
@@ -310,6 +335,20 @@ namespace Storage
             window.ShowDialog();
 
             UpdateProductTable();
+        }
+
+        private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var productToCheckNotification = _context.Products
+                .AsNoTracking()
+                .ToList()
+                .Where(x => x.CheckDanger())
+                .ToList();
+
+            if (productToCheckNotification.Any())
+            {
+                new ProductsWindow(productToCheckNotification).ShowDialog();
+            }
         }
     }
 }

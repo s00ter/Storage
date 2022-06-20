@@ -35,7 +35,6 @@ namespace Storage.ProductWindows
                         : DateTime.Parse(product.Coming);
 
                     AmountTextBox.Text = product.Amount.ToString();
-                    DimensionTypeTextBox.Text = product.DimensionType;
                     VendorCodeTextBox.Text = product.VendorCode;
                     InfoTextBox.Text = product.Info;
                     ProviderTextBox.Text = product.Provider;
@@ -43,17 +42,20 @@ namespace Storage.ProductWindows
 
                     InitializeProductType(product.ProductType);
                     InitializeProductOwner(product.ProductOwner);
+                    InitializeDimensionType(DimensionType.Штуки);
                 }
                 else
                 {
                     InitializeProductOwner(ProductOwner.Простор);
                     InitializeProductType(ProductType.Расходник);
+                    InitializeDimensionType(DimensionType.Штуки);
                 }
             }
             else
             {
                 InitializeProductOwner(ProductOwner.Простор);
                 InitializeProductType(ProductType.Расходник);
+                InitializeDimensionType(DimensionType.Штуки);
             }
 
             Closing += (_, _) =>
@@ -74,7 +76,7 @@ namespace Storage.ProductWindows
                     Cost = cost,
                     Coming = ComingPicker.SelectedDate?.ToString("d"),
                     Amount = amount,
-                    DimensionType = DimensionTypeTextBox.Text,
+                    DimensionType = (DimensionType)DimensionTypeTextBox.SelectedItem,
                     VendorCode = VendorCodeTextBox.Text,
                     Status =  ProductStatus.Наличие,
                     Info = InfoTextBox.Text,
@@ -98,14 +100,21 @@ namespace Storage.ProductWindows
             ComingPicker.SelectedDate = DateTime.Parse(product.Coming);
 
             AmountTextBox.Text = product.Amount.ToString();
-            DimensionTypeTextBox.Text = product.DimensionType;
             VendorCodeTextBox.Text = product.VendorCode;
             InfoTextBox.Text = product.Info;
             ProviderTextBox.Text = product.Provider;
             _currentId = product.Id;
 
+            InitializeDimensionType(product.DimensionType);
             InitializeProductType(product.ProductType);
             InitializeProductOwner(product.ProductOwner);
+        }
+
+        private void InitializeDimensionType(DimensionType dimensionType)
+        {
+            var items = Enum.GetValues<DimensionType>();
+            DimensionTypeTextBox.ItemsSource = items;
+            ProductTypeComboBox.SelectedItem = items.First(x => x == dimensionType);
         }
 
         private void InitializeProductType(ProductType productType)
@@ -157,7 +166,7 @@ namespace Storage.ProductWindows
                     ? ComingPicker.SelectedDate.Value.ToString("d")
                     : date.Value.ToString("d"),
                 Amount = amount,
-                DimensionType = DimensionTypeTextBox.Text,
+                DimensionType = (DimensionType)DimensionTypeTextBox.SelectedItem,
                 VendorCode = VendorCodeTextBox.Text,
                 Status = amount == 0
                     ? ProductStatus.Закончилось

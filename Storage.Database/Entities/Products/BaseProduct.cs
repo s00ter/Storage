@@ -15,7 +15,7 @@ namespace Storage.Database.Entities.Products
         public ProductStatus Status { get; set; }
         public string Info { get; set; }
         public string Provider { get; set; }
-        public string DimensionType { get; set; }
+        public DimensionType DimensionType { get; set; }
         public ProductType ProductType { get; set; }
 
         public ProductOwner ProductOwner { get; set; }
