@@ -216,7 +216,7 @@ namespace Storage
             if (contentFind.Length is not 0)
             {
                 result = result
-                    .Where(x => x.Name.ToLower().Contains(contentFind))
+                    .Where(x => x.Name.ToLower().Contains(contentFind) || x.VendorCode.ToLower().Contains(contentFind))
                     .ToList();
             }
 
