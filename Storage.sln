@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Storage", "Storage\Storage.csproj", "{F45B97DB-8474-4D8E-96A6-1F41F008ABF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage.Database", "Storage.Database\Storage.Database.csproj", "{25F287A0-5CF2-496E-AB67-7325B2DF1EF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Storage.Database", "Storage.Database\Storage.Database.csproj", "{25F287A0-5CF2-496E-AB67-7325B2DF1EF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

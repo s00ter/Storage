@@ -10,23 +10,113 @@
     <Grid x:Name="MainWin" Background="#dbdbdb">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*" MaxHeight="70"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Border Background="White" Margin="10" CornerRadius="10" Padding="5">
             <Grid>
-                <Button x:Name="AddProduct" Click="AddProduct_Click" Content="Добавить товар" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Cursor="Hand"/>
-                <TextBox x:Name="TextFind" materialDesign:HintAssist.Hint="Текст поиска" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Margin="0,0,80,0" VerticalAlignment="Top" Width="120"/>
-                <Button x:Name="ButtonFind" Click="ButtonFind_Click" Content="Поиск" HorizontalAlignment="Right" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="155" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition Width="85" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" x:Name="AddProduct" Click="AddProduct_Click" Content="Добавить товар" HorizontalAlignment="Left" Margin="0,0,0,0" Cursor="Hand"/>
+                <Button Grid.Column="1" x:Name="DeleteRowButton" Click="DeleteRowButton_Click" Content="Удалить" HorizontalAlignment="Left"></Button>
+                <Button Grid.Column="2" x:Name="ChangeData" Click="ChangeData_Click" Content="Редактирование" Width="140" HorizontalAlignment="Left" Cursor="Hand"></Button>
+                <Button Grid.Column="3" x:Name="ReportButton" Click="ReportButton_Click" Content="Отчёт" Width="80" HorizontalAlignment="Left" Cursor="Hand"></Button>
+                <TextBox Grid.Column='5' TextChanged="TextFind_TextChanged" x:Name="TextFind" materialDesign:HintAssist.Hint="Текст поиска" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Margin="0,0,0,0" Width="120" Cursor="Arrow"/>
             </Grid>
         </Border>
         <Border Grid.Row="1" Background="White" Padding="10" CornerRadius="10">
-            <DataGrid x:Name="ProductDataGrid" ColumnWidth="*" AutoGenerateColumns="False" CanUserAddRows="False" Margin="5, 10">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Id}" Width="0.2*" Header="№"></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Наименование"></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+            <TabControl>
+                <TabItem>
+                    <TabItem.Header>
+                        Все
+                    </TabItem.Header>
+                    <DataGrid x:Name="AllDataGrid" IsReadOnly="True" ColumnWidth="*" AutoGenerateColumns="False" CanUserAddRows="False" Margin="5, 10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Width="0.2*" Header="№"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Наименование"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Amount}" Width="*" Header="Кол-во"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding DimensionType}" Width="*" Header="Единица измерения"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Статус"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Client}" Width="*" Header="Заказчик"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        Продукты
+                    </TabItem.Header>
+                    <DataGrid x:Name="ProductDataGrid" IsReadOnly="True" ColumnWidth="*" AutoGenerateColumns="False" CanUserAddRows="False" Margin="5, 10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Width="0.2*" Header="№"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Наименование"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Amount}" Width="*" Header="Кол-во"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding DimensionType}" Width="*" Header="Единица измерения"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Статус"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Client}" Width="*" Header="Заказчик"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        Основные
+                    </TabItem.Header>
+                    <DataGrid x:Name="MainDataGrid" IsReadOnly="True" ColumnWidth="*" AutoGenerateColumns="False" CanUserAddRows="False" Margin="5, 10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Width="0.2*" Header="№"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Наименование"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Amount}" Width="*" Header="Кол-во"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding DimensionType}" Width="*" Header="Единица измерения"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Статус"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Client}" Width="*" Header="Заказчик"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        Расходники
+                    </TabItem.Header>
+                    <DataGrid x:Name="ResourceDataGrid" IsReadOnly="True" ColumnWidth="*" AutoGenerateColumns="False" CanUserAddRows="False" Margin="5, 10">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Width="0.2*" Header="№"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Наименование"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Amount}" Width="*" Header="Кол-во"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding DimensionType}" Width="*" Header="Единица измерения"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Статус"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Client}" Width="*" Header="Заказчик"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
         </Border>
     </Grid>
 </Window>
