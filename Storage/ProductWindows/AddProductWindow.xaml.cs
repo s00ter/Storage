@@ -28,9 +28,7 @@ namespace Storage.ProductWindows
             AmountTextBox.Text = product.Amount.ToString();
             DimensionTypeTextBox.Text = product.DimensionType;
             VendorCodeTextBox.Text = product.VendorCode;
-            StatusComboBox.Text = product.Status;
             InfoTextBox.Text = product.Info;
-            ClientTextBox.Text = product.Client;
             ProviderTextBox.Text = product.Provider;
             ProductTypeComboBox.Text = product.ProductType;
             _currentId = product.Id;
@@ -73,9 +71,8 @@ namespace Storage.ProductWindows
                 Amount = amount,
                 DimensionType = DimensionTypeTextBox.Text,
                 VendorCode = VendorCodeTextBox.Text,
-                Status = StatusComboBox.Text,
+                Status = "В наличии",
                 Info = InfoTextBox.Text,
-                Client = ClientTextBox.Text,
                 Provider = ProviderTextBox.Text,
                 ProductType = ProductTypeComboBox.Text
 

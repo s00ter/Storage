@@ -40,14 +40,13 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Width="0.2*" Header="№"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Наименование"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Amount}" Width="*" Header="Кол-во"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding DimensionType}" Width="*" Header="Единица измерения"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Статус"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Client}" Width="*" Header="Заказчик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
                         </DataGrid.Columns>
@@ -61,14 +60,13 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Width="0.2*" Header="№"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Наименование"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Amount}" Width="*" Header="Кол-во"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding DimensionType}" Width="*" Header="Единица измерения"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Статус"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Client}" Width="*" Header="Заказчик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
                         </DataGrid.Columns>
@@ -82,14 +80,13 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Width="0.2*" Header="№"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Наименование"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Amount}" Width="*" Header="Кол-во"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding DimensionType}" Width="*" Header="Единица измерения"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Статус"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Client}" Width="*" Header="Заказчик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
                         </DataGrid.Columns>
@@ -103,14 +100,13 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Width="0.2*" Header="№"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Name}" Width="*" Header="Наименование"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Amount}" Width="*" Header="Кол-во"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding DimensionType}" Width="*" Header="Единица измерения"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding VendorCode}" Width="*" Header="Артикул"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Cost}" Width="*" Header="Стоимость"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Coming}" Width="*" Header="Приход"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Status}" Width="*" Header="Статус"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Info}" Width="*" Header="Информация"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Client}" Width="*" Header="Заказчик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Provider}" Width="*" Header="Поставщик"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding ProductType}" Width="*" Header="Тип продукта"></DataGridTextColumn>
                         </DataGrid.Columns>

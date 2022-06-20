@@ -10,21 +10,22 @@
     <Grid>
         <StackPanel Margin="10,20">
             <TextBox x:Name="NameTextBox" materialDesign:HintAssist.Hint="Наименование" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
-            <TextBox x:Name="CostTextBox" materialDesign:HintAssist.Hint="Цена" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
-            <DatePicker x:Name="ComingPicker" materialDesign:HintAssist.Hint="Приход" Style="{StaticResource MaterialDesignDatePicker}" Width="150" Cursor="Arrow"/>
-            <TextBox x:Name="AmountTextBox" materialDesign:HintAssist.Hint="Кол-во" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
-            <TextBox x:Name="DimensionTypeTextBox" materialDesign:HintAssist.Hint="Единица измерения" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
             <TextBox x:Name="VendorCodeTextBox" materialDesign:HintAssist.Hint="Артикул" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
-            <ComboBox x:Name="StatusComboBox" Width="150" Cursor="Arrow" SelectedIndex="0" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <TextBlock>В наличии</TextBlock>
-                <TextBlock>Отсутствует</TextBlock>
+            <TextBox x:Name="AmountTextBox" materialDesign:HintAssist.Hint="Кол-во" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
+            <ComboBox x:Name="DimensionTypeTextBox" Width="150" Cursor="Arrow" SelectedIndex="0" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <TextBlock>Штуки</TextBlock>
+                <TextBlock>Литры</TextBlock>
+                <TextBlock>Метры</TextBlock>
             </ComboBox>
+            <DatePicker x:Name="ComingPicker" materialDesign:HintAssist.Hint="Приход" Style="{StaticResource MaterialDesignDatePicker}" Width="150" Cursor="Arrow"/>
+            
             <TextBox x:Name="InfoTextBox" materialDesign:HintAssist.Hint="Информация" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
-            <TextBox x:Name="ClientTextBox" materialDesign:HintAssist.Hint="Заказчик" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
             <TextBox x:Name="ProviderTextBox" materialDesign:HintAssist.Hint="Поставщик" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
+            <TextBox x:Name="CostTextBox" materialDesign:HintAssist.Hint="Цена" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"/>
             <ComboBox x:Name="ProductTypeComboBox" Width="150" Cursor="Arrow" SelectedIndex="0" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                 <TextBlock>Продукт</TextBlock>
                 <TextBlock>Расходник</TextBlock>
+                <TextBlock>Основной</TextBlock>
             </ComboBox>
             <Button x:Name="AddButton" Click="AddButton_OnClick" Margin="50, 20" Cursor="Hand">Добавить</Button>
         </StackPanel>
