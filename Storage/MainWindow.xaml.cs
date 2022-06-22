@@ -54,12 +54,12 @@ namespace Storage
 
             AlenSearchCheckBox.Checked += (_, _) =>
             {
-                UpdateProductTable(_alls.Where(x => x.ProductOwner == ProductOwner.АленСтрой).ToList());
+                UpdateProductTable(_alls.Where(x => x.ProductOwner == ProductOwner.АлинСтрой).ToList());
             };
 
             AlenSearchCheckBox.Unchecked += (_, _) =>
             {
-                UpdateProductTable(_alls.Where(x => x.ProductOwner != ProductOwner.АленСтрой).ToList());
+                UpdateProductTable(_alls.Where(x => x.ProductOwner != ProductOwner.АлинСтрой).ToList());
             };
 
             ProstoreSearchCheckBox.Checked += (_, _) =>
@@ -297,7 +297,7 @@ namespace Storage
 
         private bool CheckAvailable(Product product)
         {
-            var result = AlenSearchCheckBox.IsChecked == true && product.ProductOwner == ProductOwner.АленСтрой;
+            var result = AlenSearchCheckBox.IsChecked == true && product.ProductOwner == ProductOwner.АлинСтрой;
             result = result || ProstoreSearchCheckBox.IsChecked == true && product.ProductOwner == ProductOwner.Простор;
 
             return result;

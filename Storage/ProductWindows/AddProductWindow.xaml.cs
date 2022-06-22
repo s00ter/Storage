@@ -74,7 +74,7 @@ namespace Storage.ProductWindows
                 {
                     Name = NameTextBox.Text,
                     Cost = cost,
-                    Coming = ComingPicker.SelectedDate?.ToString("d"),
+                    Coming = ComingPicker.SelectedDate.HasValue ? ComingPicker.SelectedDate.Value.ToString("d") : null,
                     Amount = amount,
                     DimensionType = (DimensionType)DimensionTypeTextBox.SelectedItem,
                     VendorCode = VendorCodeTextBox.Text,
@@ -114,7 +114,7 @@ namespace Storage.ProductWindows
         {
             var items = Enum.GetValues<DimensionType>();
             DimensionTypeTextBox.ItemsSource = items;
-            ProductTypeComboBox.SelectedItem = items.First(x => x == dimensionType);
+            DimensionTypeTextBox.SelectedItem = items.First(x => x == dimensionType);
         }
 
         private void InitializeProductType(ProductType productType)

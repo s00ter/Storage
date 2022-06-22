@@ -29,6 +29,9 @@ namespace Storage.ProductWindows
 
             InitializeComponent();
 
+            NameOfProduct.Text = "Наименование продукта: " + product.Name;
+            VendoreCodeOfProduct.Text = "Ариткул продукта: " + product.VendorCode;
+
             ProductDataGrid.ItemsSource = _productInfos;
             Title = "Таблица изменений для " + product.Name;
 
@@ -60,7 +63,7 @@ namespace Storage.ProductWindows
         {
             if (!int.TryParse(ChangeValueTextBox.Text, out var ChangeValue))
             {
-                MessageBox.Show("Стоимость должна быть числом");
+                MessageBox.Show("Кол-во должно быть числом");
                 return;
             }
 

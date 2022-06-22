@@ -3,6 +3,6 @@
     public enum ProductOwner
     {
         Простор,
-        АленСтрой
+        АлинСтрой
     }
 }

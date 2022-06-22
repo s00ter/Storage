@@ -14,8 +14,13 @@
         </Grid.ColumnDefinitions>
         <Border Background="White" Padding="10" CornerRadius="10" MaxWidth="350" MinWidth="350">
             <Grid>
+                <StackPanel Margin="10 10" VerticalAlignment="Top">
+                    <TextBlock x:Name="NameOfProduct" Width="auto" TextAlignment="Center" VerticalAlignment="Top" Height="30" TextWrapping="Wrap" FontSize="15"></TextBlock>
+                    <TextBlock x:Name="VendoreCodeOfProduct" Width="auto" TextAlignment="Center" VerticalAlignment="Top" Height="30" TextWrapping="Wrap" FontSize="15"></TextBlock>
+                </StackPanel>
                 <StackPanel Margin="10 10" VerticalAlignment="Center">
-                    <TextBox x:Name="ChangeValueTextBox" materialDesign:HintAssist.Hint="Значение" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"></TextBox>
+                    
+                    <TextBox x:Name="ChangeValueTextBox" materialDesign:HintAssist.Hint="Кол-во" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="150" Cursor="Arrow"></TextBox>
                     <DatePicker x:Name="DateOfChangePicker" materialDesign:HintAssist.Hint="Дата" Style="{StaticResource MaterialDesignDatePicker}" Width="150" Cursor="Arrow"/>
                     <Button x:Name="AddComingButton" Click="AddComing_Click" Margin="50, 10">Добавить приход</Button>
                     <Button x:Name="AddExpenseButton" Click="AddExpense_Click" Margin="50, 10" Cursor="Hand">Добавить расход</Button>

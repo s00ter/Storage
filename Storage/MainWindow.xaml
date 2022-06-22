@@ -31,7 +31,7 @@
                 <Button Grid.Column="3" x:Name="ReportButton" Click="ReportButton_Click" Content="Отчёт" Width="80" HorizontalAlignment="Left" Cursor="Hand"></Button>
                 <StackPanel Grid.Column="4" Orientation="Vertical" HorizontalAlignment="Right">
                     <CheckBox x:Name="ProstoreSearchCheckBox" IsChecked="True">Простор</CheckBox>
-                    <CheckBox x:Name="AlenSearchCheckBox" IsChecked="True">АленСтрой</CheckBox>
+                    <CheckBox x:Name="AlenSearchCheckBox" IsChecked="True">АлинСтрой</CheckBox>
                 </StackPanel>
                 <TextBox Grid.Column="5" TextChanged="TextFind_TextChanged" x:Name="TextFind" materialDesign:HintAssist.Hint="Текст поиска" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Right" Margin="0,0,0,0" Width="120" Cursor="Arrow"/>
                 <Button Grid.Column="6" x:Name="SettingsButton" Click="SettingsButton_OnClick" Background="DimGray" Margin="15, 0" HorizontalAlignment="Center">
